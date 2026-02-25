@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<!--
+  Content by Fabio Casati
+  https://www.linkedin.com/in/sphoebs/
+  https://x.com/sphoebs
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project - Designing Large Scale AI Systems</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header loaded dynamically -->
+
+  <main>
+    <h1>Course Project</h1>
+    <p class="text-muted">Build and evaluate a large-scale AI system (Weeks 6-12)</p>
+
+    <h2>Overview</h2>
+    <p>
+      The course project is the capstone experience of this course. You'll apply everything
+      you've learned to design, implement, and rigorously evaluate an AI-powered system.
+      Projects are individual for both tracks.
+    </p>
+
+    <h2>Project Options (Track A)</h2>
+    <p>
+      For Track A, choose one of the four project directions described in the
+      <a href="AI_Design_Projects_2026.md"><strong>Project Descriptions</strong></a> document.
+      Each project defines a problem space, baseline capabilities, and evaluation challenges — you shape the rest.
+    </p>
+    <div class="card-grid" style="grid-template-columns: repeat(2, 1fr);">
+      <div class="card">
+        <h4>1. Knowledge Management &amp; QnA</h4>
+        <p>Ingest a knowledge base, detect gaps and inconsistencies, propose fixes. Graph representations, embedding similarity, statistical claims about detection quality.</p>
+      </div>
+      <div class="card">
+        <h4>2. Peer Review System</h4>
+        <p>Multi-agent review pipeline providing structured, multi-perspective feedback on written work. Reviewer diversity, inter-rater agreement, iterative improvement.</p>
+      </div>
+      <div class="card">
+        <h4>3. Facebook for Agents</h4>
+        <p>Social platform where AI agents replicate human personas and interact. Persona consistency, mode collapse detection, emergent social dynamics.</p>
+      </div>
+      <div class="card">
+        <h4>4. Conversational Clustering</h4>
+        <p>AI agent that iteratively clusters data through dialogue with a human. Contradictory feedback, soft assignments, evaluation without ground truth.</p>
+      </div>
+    </div>
+
+    <h2>Track Options</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Track A: Class System</h3>
+        <p>
+          Work on a shared class project with a well-defined scope and requirements.
+          We work together in class: reviews, working sessions, design clinics, and rehearsals.
+        </p>
+        <ul>
+          <li>Individual</li>
+          <li>Pre-defined problem space with shared baseline</li>
+          <li>In-class reviews and working sessions (Weeks 7–11)</li>
+          <li>Exam: <strong>presentation + discussion</strong></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Track B: Capstone (Individual)</h3>
+        <p>
+          Propose your own project idea. The instructor approves the scope,
+          then you work independently. Track B projects are <strong>individual only</strong>.
+        </p>
+        <ul>
+          <li>Custom problem definition, must be approved by instructor</li>
+          <li>Full system design responsibility</li>
+          <li>Independent work — no in-class reviews</li>
+          <li>Exam: <strong>presentation + detailed discussion</strong> of your design decisions, evaluation, and results</li>
+        </ul>
+        <h4>Example projects from previous students</h4>
+        <ul>
+          <li><a href="https://github.com/wamuumu/ai-workflows">AI-Workflows</a> — evaluation framework for AI-powered workflow generation, comparing monolithic, incremental, and bottom-up strategies</li>
+          <li><a href="https://github.com/sbrentan/tool-calling-optimization">Tool Calling Optimization</a> — measuring LLM tool-calling accuracy across retrieval methods (MCP, clustering, RAG, adaptive RAG)</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>Project Requirements</h2>
+
+    <h3>System Requirements</h3>
+    <ul>
+      <li>Functional AI-powered application with clear use case</li>
+      <li>Integration of agents, tools, and/or memory systems</li>
+      <li>Appropriate error handling and logging</li>
+      <li>Basic observability (metrics, logs)</li>
+      <li>Safety considerations and guardrails where appropriate</li>
+    </ul>
+
+    <h3>Testing Requirements</h3>
+    <p>AI projects have two kinds of tests. You need both.</p>
+    <ul>
+      <li>
+        <strong>Deterministic tests</strong> — for the parts that have right answers: data ingestion, parsing, tool execution, state management, API integration. These are standard unit/integration tests. If your system extracts facts from documents, test the extractor. If it calls tools, test that the tools do what they claim.
+      </li>
+      <li>
+        <strong>Eval suite</strong> — for LLM outputs that don't have a single right answer. These run your system on your golden dataset and score the results (via LLM judge, rubric, or human labels). They won't pass/fail cleanly — they produce scores and distributions. That's fine. They should still be automated and runnable.
+      </li>
+    </ul>
+    <p><strong>Concretely:</strong></p>
+    <ul>
+      <li>Use <code>pytest</code>. All tests runnable with a single command: <code>uv run pytest</code></li>
+      <li>Set up <strong>GitHub Actions</strong> to run your deterministic tests on every push. A broken push should be visible immediately.</li>
+      <li>The eval suite can be a separate command (e.g., <code>uv run pytest tests/eval/ --slow</code>) since it costs money and takes time — but it must be scripted, not manual.</li>
+      <li>Write tests as you build features, not after. If you add a tool, add a test for it in the same commit.</li>
+    </ul>
+
+    <h3>Evaluation Requirements</h3>
+    <ul>
+      <li><strong>Golden Dataset:</strong> Curated test set with ground truth labels</li>
+      <li><strong>Metrics:</strong> Well-justified selection of evaluation metrics</li>
+      <li><strong>Experiments:</strong> At least one ablation study or comparative experiment</li>
+      <li><strong>Error Analysis:</strong> Systematic categorization of failure modes</li>
+      <li><strong>Uncertainty:</strong> Confidence intervals or other uncertainty measures</li>
+    </ul>
+
+    <h2>Weekly Progress</h2>
+    <div class="card" style="border-left: 4px solid var(--primary);">
+      <p>
+        <strong>I expect visible progress every week, and I will check.</strong>
+        Your GitHub repository is not just a final deliverable — it is a record of how you work.
+      </p>
+      <ul>
+        <li>Commit and push work <strong>at least weekly</strong> from Week 6 onward. I review commit history.</li>
+        <li>Weeks with no activity will be noticed and will count against you.</li>
+        <li>If you're stuck, commit what you have — a failed experiment, a write-up of what you tried, updated evaluation notes. Silence is worse than a dead end.</li>
+        <li>This is not about volume. Three thoughtful commits that show you wrestled with a design decision beat fifty auto-generated files.</li>
+        <li><strong>Use GitHub Issues to track your work.</strong> Break your project into tasks, create issues, reference them in commits (<code>fixes #3</code>), close them as you go. Aim for ~3–5 active issues per week. An issue stuck "in progress" for three weeks with no linked commits tells a story too.</li>
+      </ul>
+      <p>
+        A project that materializes fully formed in the last week tells me nothing about how you think, debug, or respond to problems — and it's usually worse than one built iteratively.
+      </p>
+    </div>
+
+    <h2>Deliverables</h2>
+
+    <h3>Both tracks: Exam</h3>
+    <p>The exam for both tracks is a <strong>presentation followed by a discussion</strong>. You present your system, design choices, evaluation, and results, then answer questions.</p>
+
+    <h3>Both tracks: Final deliverables</h3>
+    <ul>
+      <li><strong>Presentation + discussion</strong> — system demo, design choices and alternatives, evaluation results, limitations</li>
+      <li><strong>Report</strong> — problem statement, architecture, experiments, results, error analysis, lessons learned</li>
+      <li><strong>Code repository</strong> — documented source, README with setup instructions, evaluation scripts, golden dataset</li>
+    </ul>
+
+    <h3>Track A: In-class milestones</h3>
+    <ul>
+      <li><strong>Week 6:</strong> Project spec v1 — problem statement, architecture sketch, evaluation plan</li>
+      <li><strong>Week 7:</strong> Review #1 — refined scope, detailed architecture, golden dataset status</li>
+      <li><strong>Weeks 8–10:</strong> Working sessions — implementation, evaluation runs, design clinics</li>
+      <li><strong>Week 9:</strong> Mid-project presentation (10–12 min internal demo)</li>
+      <li><strong>Week 11:</strong> Results review and presentation rehearsal</li>
+      <li><strong>Week 12:</strong> Final presentation + discussion (graded)</li>
+    </ul>
+
+    <h3>Track B: Independent milestones</h3>
+    <ul>
+      <li><strong>Week 6:</strong> Scope proposal — submit problem statement and high-level plan for instructor approval</li>
+      <li><strong>Weeks 7–11:</strong> Independent work</li>
+      <li><strong>Exam session:</strong> Presentation + detailed discussion (graded)</li>
+    </ul>
+
+    <h2>Timeline (Track A)</h2>
+    <p>Track B students submit their scope proposal in Week 6 and work independently until the exam.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Week</th>
+          <th>Activity</th>
+          <th>Focus</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>6</strong></td>
+          <td>Project Kick-off (L12)</td>
+          <td>Track selection, Project Spec v1</td>
+        </tr>
+        <tr>
+          <td><strong>7</strong></td>
+          <td>Project Review #1 (L14)</td>
+          <td>Architecture, evaluation plan, milestone planning</td>
+        </tr>
+        <tr>
+          <td><strong>8</strong></td>
+          <td>Working Sessions (L15-16)</td>
+          <td>Implementation, first evaluation run</td>
+        </tr>
+        <tr>
+          <td><strong>9</strong></td>
+          <td>Mid-Project Demo (L17)</td>
+          <td>Internal presentation, design clinic</td>
+        </tr>
+        <tr>
+          <td><strong>10</strong></td>
+          <td>Final Push (L19-20)</td>
+          <td>Integration, hardening, final evaluation runs</td>
+        </tr>
+        <tr>
+          <td><strong>11</strong></td>
+          <td>Results Review (L21-22)</td>
+          <td>Storytelling, presentation rehearsals</td>
+        </tr>
+        <tr>
+          <td><strong>12</strong></td>
+          <td>Final Presentations (L23-24)</td>
+          <td>Graded presentations, retrospective</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="card">
+      <p>Both tracks are <strong>individual</strong>. You are responsible for the full scope: design, implementation, evaluation, and presentation.</p>
+    </div>
+
+    <h2>Grading Rubric (0–30)</h2>
+    <p>Both tracks use the same rubric. Each dimension is scored 0–10.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Dimension (0–10 each)</th>
+          <th>What we look for</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Design & Prototypes</strong></td>
+          <td>Clear goals, meaningful design alternatives, working prototype(s) that reflect the design choices</td>
+        </tr>
+        <tr>
+          <td><strong>Experiments & Analysis</strong></td>
+          <td>Experiments comparing variants, appropriate metrics, honest analysis of results and failures, reflection on limitations</td>
+        </tr>
+        <tr>
+          <td><strong>Communication</strong></td>
+          <td>Well-structured presentation and report, clear explanation of choices and lessons learned, good Q&A</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Resources</h2>
+    <div class="card">
+      <h3>Getting Help</h3>
+      <ul>
+        <li><strong>Office Hours:</strong> Right after each class</li>
+        <li><strong>Working Sessions:</strong> Weeks 8 and 10 are dedicated project time</li>
+        <li><strong>Design Clinics:</strong> Week 9 breakout tables for specific topics</li>
+        <li><strong>Peer Reviews:</strong> Feedback from other students throughout</li>
+      </ul>
+    </div>
+
+    <p class="mt-3">
+      <a href="assessments.html" class="btn-secondary btn">Back to Assessments</a>
+    </p>
+  </main>
+
+  <footer>
+    <p>Designing Large Scale AI Systems &middot; Spring 2026</p>
+    <p class="text-small">Content by Fabio Casati · <a href="https://www.linkedin.com/in/sphoebs/">LinkedIn</a> · <a href="https://x.com/sphoebs">X</a></p>
+  </footer>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
