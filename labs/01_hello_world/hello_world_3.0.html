@@ -91,45 +91,11 @@ brew install portaudio
 cp .env.example .env
 # Edit .env and add your OPENAI_API_KEY</code></pre>
 
-        <p>Get your API key from <a href="https://platform.openai.com/api-keys">platform.openai.com/api-keys</a>. All scripts automatically load keys from the <code>.env</code> file via <a href="https://pypi.org/project/python-dotenv/">python-dotenv</a>.</p>
+        <p>A shared API key will be provided during the lab. Add it to your <code>.env</code> file. All scripts automatically load keys from <code>.env</code> via <a href="https://pypi.org/project/python-dotenv/">python-dotenv</a>.</p>
 
         <h3>Cost awareness</h3>
 
-        <p>API calls cost money. Here's what to expect for this lesson:</p>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Example</th>
-                    <th>Model</th>
-                    <th>Approximate cost</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Chat completion</td>
-                    <td>gpt-4.1-mini</td>
-                    <td>~$0.001</td>
-                </tr>
-                <tr>
-                    <td>Streaming</td>
-                    <td>gpt-4.1-mini</td>
-                    <td>~$0.001</td>
-                </tr>
-                <tr>
-                    <td>Voice (Whisper + TTS)</td>
-                    <td>whisper-1, tts-1</td>
-                    <td>~$0.01</td>
-                </tr>
-                <tr>
-                    <td>Image generation</td>
-                    <td>dall-e-3</td>
-                    <td>~$0.04</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <p>Running all examples once costs roughly $0.05. See <a href="https://openai.com/pricing">OpenAI pricing</a> for current rates.</p>
+        <p>API calls cost real money. Even though you're using a shared key, it's good practice to understand what things cost. See <a href="https://openai.com/pricing">OpenAI pricing</a> for current rates.</p>
 
         <h3>Alternative: OpenRouter</h3>
 
@@ -333,8 +299,7 @@ speech = client.audio.speech.create(
 image_url = response.data[0].url
 revised_prompt = response.data[0].revised_prompt</code></pre>
 
-        <p><strong>Run it:</strong></p>
-        <pre><code class="language-bash">uv run python labs/01_hello_world/4_image.py</code></pre>
+        <p><strong>Please don't run this one</strong> — image generation is expensive (~$0.04 per call). The instructor will demo it in class.</p>
 
         <div class="content-card">
             <h4>Prompt revision</h4>
