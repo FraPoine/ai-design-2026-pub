@@ -18,91 +18,59 @@ The descriptions below are intentionally high-level. They define the problem spa
 
 | Project | Core Idea | Key Challenge |
 |---------|-----------|---------------|
-| Peer Review System | An agentic review pipeline that provides structured, multi-perspective feedback on written work | Generating useful critique (not just surface-level); managing multiple reviewer agents |
+| AI-Powered Course Hub | A knowledge management platform where students and professors share materials, ask/answer questions, and AI assists with auto-answers, catch-up summaries, and assignment pre-checks | Answer quality and knowing when to defer to humans; relevance ranking across heterogeneous content; evaluating AI contributions vs. human ones |
 | Social Network for Agents (and Humans) | A social platform where AI agents replicate human personas and interact with each other | Persona consistency; emergent social dynamics; meaningful (not trivial) interactions |
 | Conversational Clustering | An AI agent that iteratively clusters data through dialogue with a human | Reconciling contradictory feedback; evaluating without ground truth; deciding what to ask and when |
 
 ---
 
-## Project 1: Knowledge Management & QnA
+## Project 1: AI-Powered Course Hub
 
 ### Motivation
 
-Knowledge bases—whether they are corporate wikis, technical documentation, or research collections—tend to decay over time. Information becomes outdated, contradictions creep in between documents, and important topics go undocumented. Manually auditing a KB is tedious and error-prone. Can an AI system do it?
+Every course generates a growing pile of knowledge: lecture slides, announcements, Q&A threads, reading lists, assignment specs, student notes. This information lives in scattered places—LMS pages, email threads, chat channels, shared drives—and nobody has a complete picture. Students who miss a class struggle to catch up. Questions get asked and re-asked. Professors repeat themselves across channels.
+
+What if a single platform could organize all of this, and an AI layer could make it *useful*—answering questions from course materials, summarizing what happened last week, flagging common misconceptions, and pre-checking assignments before submission?
 
 ### Baseline Capabilities
 
 At a minimum, the system should be able to:
 
-- Ingest a set of documents (the knowledge base) and answer questions over them.
-- Analyze the KB to detect gaps: topics that are referenced but never explained, questions that the KB should answer but cannot.
-- Analyze the KB to detect inconsistencies: conflicting facts, contradictory instructions, outdated information.
-- Propose and apply fixes: generate new content to fill gaps, flag or resolve contradictions, suggest updates.
+- Let professors and students **upload and link to materials**: slides, readings, code, notes, external resources.
+- Support a **Q&A board** where anyone can post questions, answer them, and upvote useful responses.
+- Let professors **post announcements** and organize materials by topic or week.
+- Provide **AI-powered features** that participate alongside humans:
+  - Auto-answer questions using course materials as context (with source citations).
+  - Generate **catch-up summaries**: "What happened in Week 3?" drawing from slides, announcements, and Q&A activity.
+  - **Pre-check assignments** against stated requirements before students submit (e.g., "Your report is missing the evaluation section mentioned in the rubric").
+  - **Smart search** across all content types: find the slide that explains X, the Q&A thread about Y, the announcement about Z.
 
 ### Design Considerations
 
 Some questions to think about as you shape the project (you do not need to address all of them):
 
-- How do you represent knowledge so that an LLM can reason about consistency? Chunks? Graphs? Something else?
-- How does the system distinguish between a true contradiction and context-dependent information?
-- Should fixes be applied automatically, or should the system propose changes for a human to approve?
-- What happens when the KB is large—does the system scale?
+- When should the AI answer a question directly vs. surface existing human answers vs. flag it for a professor?
+- How do you handle questions the AI shouldn't answer (e.g., exam content, grading disputes)?
+- How do you keep AI answers grounded in actual course materials rather than general knowledge?
+- How does the system handle contradictions between materials (e.g., a slide says one thing, a Q&A answer says another)?
+- What's the right UX for AI contributions—should they look different from human posts? Should they be editable?
+- How do you handle the cold-start problem at the beginning of a course when there's little content?
 
-**Where KDD techniques apply.** This project is a natural home for graph-based representations. A knowledge graph lets you use centrality measures to find the most important concepts, community detection to identify topical clusters, and link prediction to surface missing connections. Embedding-based similarity (cosine distance over document or chunk embeddings) is the workhorse for detecting near-duplicate content and candidate contradictions. When you claim two documents conflict, you're making a statistical claim—how confident are you? The tools from probability and uncertainty estimation (confidence intervals, bootstrapping over test cases) apply directly to quantifying your detection precision.
+**Where KDD techniques apply.** Embedding-based retrieval is the backbone: you need to match questions to relevant materials across slides, Q&A posts, and announcements. Clustering questions reveals common pain points and potential gaps in materials. Upvote patterns give you a signal about content quality—but it's a noisy, biased signal (popular doesn't mean correct). When the AI pre-checks an assignment, it's making a classification decision (requirement met/not met) with uncertain confidence—how do you calibrate that? Ranking and recommendation techniques apply to surfacing the most relevant materials for a given context.
 
-### Evaluation Challenge
+### Things Worth Measuring
 
-Think of your system as generating a *distribution of value* every time it runs. When it flags a gap, that flag is either useful (positive value) or a false alarm (negative value—it wastes someone's time, or worse, leads to an unnecessary edit). When it proposes a fix, that fix either improves the KB or introduces a new problem. The value your system generates is a random variable, and your job is to estimate its distribution—not to produce a single number and paint it green.
+Your evaluation should serve the three grading pillars — design alternatives, honest experiments, clear communication. Here are starting points for this project:
 
-**Detecting gaps and inconsistencies.** When your system flags a "gap," is it a real gap or a false positive? There's no simple ground truth here—whether something counts as a gap depends on what the KB is supposed to cover, and reasonable people will disagree. If you build a golden dataset of "known gaps" and test against it, be aware that you're likely to overfit to your own examples and confuse coverage of *your* test cases with coverage of *real* gaps. What's your false positive rate? Your false negative rate? How would you even estimate those? Can you design experiments that give you a credible range rather than a single number?
-
-**Evaluating fixes.** When the system generates new content, how do you know it's good? "Good" is multi-dimensional: factually correct, consistent with the rest of the KB, actually addresses the gap, doesn't create new problems. An LLM judge can assess some of these, but judge prompt sensitivity is a real source of noise—small changes in how you frame the rubric can swing scores significantly. How do you account for that? Have you tried running the same evaluation with three reasonable variations of the judge prompt to see how much the scores move?
-
-**The iteration trap.** If you try 10 prompt variants and report the best score, you've introduced a systematic optimistic bias—the "winner's bonus." With noisy measurements, the variant that looks best is expected to be lucky, not best. If your test set has 100 examples and your accuracy is around 80%, the 95% confidence interval from sampling alone is roughly 16 points wide. A 5-point improvement over your baseline might be noise. What would it take to be confident that Version B is genuinely better than Version A?
-
----
-
-## Project 2: Peer Review System
-
-### Motivation
-
-Peer review is valuable but inconsistent. Human reviewers vary in expertise, effort, and focus. A system with multiple AI reviewer agents—each with a different perspective or specialization—could provide faster, more structured, and more comprehensive feedback on written work, from research papers to class assignments to technical reports.
-
-### Baseline Capabilities
-
-At a minimum, the system should be able to:
-
-- Accept a document for review (paper, report, assignment, etc.).
-- Run multiple reviewer agents that each provide feedback from a different angle (e.g., clarity, technical correctness, methodology, writing quality).
-- Aggregate and synthesize reviews into structured, actionable feedback.
-- Support at least one iteration: the author revises, the system re-reviews and notes what improved.
-
-### Design Considerations
-
-Some questions to think about:
-
-- How do you design reviewer agents so they give genuinely different (not redundant) feedback?
-- How do you go beyond surface-level comments (grammar, formatting) to substantive critique?
-- Can the reviewers interact with each other (e.g., debate a point, resolve disagreements)?
-- How do you handle different document types (a research paper vs. a code review vs. a business report)?
-
-**Where KDD techniques apply.** Are your reviewers actually saying different things, or the same thing in different words? Embed the review comments and cluster them—if three "different" reviewers produce comments that land in the same cluster, your diversity is illusory. Inter-rater agreement statistics (Cohen's kappa, Krippendorff's alpha) give you a principled way to measure whether your reviewers agree more or less than human reviewers do. Reviewer calibration is a measurement problem: each reviewer is a noisy instrument, and you need to estimate its bias and variance before you can trust the signal.
-
-### Evaluation Challenge
-
-This project is almost recursively self-referential: you're building a system that evaluates, and you need to evaluate the evaluator. Every source of noise and bias we discuss in the course applies here—and some of them apply *twice*.
-
-**What makes a review "good"?** This is fundamentally subjective, and that's the point. A review that one author finds helpful, another might find vague or irrelevant. When you define "quality" for your reviews, you are making a rubric mapping decision—and as we discuss in class, different reasonable rubrics can produce different winners. Be explicit about what you're measuring and why. Defend your choices, but also show what would change under a different reasonable definition.
-
-**Noise in human judgment is your baseline, not your enemy.** If you have multiple people rate the same reviews, they will disagree. How much? That disagreement is data—it tells you the noise floor of your measurement. If five raters can't agree on whether a review is good, then a single LLM judge score is not more trustworthy just because it gives you one number. Consider: if true approval of a review is 80% and you have a 5-person panel, there's still roughly a 1-in-17 chance the majority will rate it negatively. That's not a bug; it's the reality of subjective evaluation. Your job is to quantify it, not hide it.
-
-**Surface vs. substance.** It's easy to generate reviews that *look* thorough—long, well-structured, uses the right vocabulary—but say nothing actionable. How do you distinguish between reviews that are genuinely useful and reviews that are just fluent? This is the "borderline mass" problem: many reviews sit in the zone where reasonable judges could go either way. A small change in how you prompt your judge—say, emphasizing "actionability" vs. "thoroughness"—could flip a large fraction of borderline cases and move your headline metric by many points.
-
-**Did the document actually improve?** When an author revises based on your system's feedback and the system re-reviews, did the document get better? Did the reviews get better (more targeted to remaining issues)? Or is the system just giving the same generic feedback again? Measuring improvement over iterations requires a paired comparison design—compare the *same* document before and after, with the *same* judge—so that much of the measurement noise cancels out. Without pairing, you're comparing two noisy estimates independently, and the uncertainty on the difference is much larger than it needs to be.
+- **Answer groundedness**: is the AI citing actual course materials, or hallucinating from general knowledge?
+- **When to stay quiet**: what's the cost of a wrong AI answer vs. the cost of silence?
+- **Pre-check precision/recall**: false positives erode trust, false negatives defeat the purpose — estimate both rates
+- **Catch-up summary accuracy**: can a student who reads only the summary participate in the next class?
+- **Search relevance**: does smart search surface the right content across slides, Q&A, and announcements?
 
 ---
 
-## Project 3: Social Network for Agents (and Humans)
+## Project 2: Social Network for Agents (and Humans)
 
 ### Motivation
 
@@ -128,23 +96,19 @@ Some questions to think about:
 
 **Where KDD techniques apply.** Mode collapse detection is a clustering and diversity problem. Embed agent outputs and measure cluster separation—if all agents map to the same region of embedding space, they've collapsed regardless of how different they *read* on the surface. The interaction network itself is a graph: who talks to whom, who responds to whom, which topics attract clusters of agents. Graph metrics (degree distribution, community structure, betweenness centrality of topics) can reveal whether your social dynamics are rich or degenerate. Cosine similarity distributions across agent outputs give you a quantitative handle on diversity that goes beyond "they seem different to me."
 
-### Evaluation Challenge
+### Things Worth Measuring
 
-This project has the hardest evaluation problem of the three because the core quality attribute—"meaningful social interaction"—is deeply subjective and poorly defined. That's not a weakness of the project; it's what makes it interesting, and it's where you'll learn the most about the gap between "this feels good" and "I can measure this."
+Your evaluation should serve the three grading pillars — design alternatives, honest experiments, clear communication. Here are starting points for this project:
 
-**What does "meaningful" even mean?** Two agents exchanging polite, grammatically correct messages isn't interesting. But what *is*? Disagreement? Persuasion? Humor? Emotional depth? You'll need to operationalize what you mean by "quality" here—turn a vague concept into something you can measure, even imperfectly. Expect that your definition will be debatable. That's fine. What matters is that you're explicit about it, that you can defend your choices, and that you can show what happens under alternative definitions.
-
-**From vibe evals to measurement.** The temptation is to look at the interactions, say "this seems cool," and report that. That's a vibe eval—it's where everyone starts, and in the early days of GPT-3.5, it's how companies shipped products. It's also how teams "overfitted to the CTO": the CTO did vibe evals, the team logged the CTO's test prompts, and they optimized for making presentations look good rather than making the system work. You need to get past this. Even rough quantification—"4 out of 6 independent raters found the conversation substantive"—is better than one person's gut feeling, because at least you can see the noise.
-
-**Persona consistency.** This is more measurable than "meaningfulness," but still tricky. You could ask judges "does this agent sound like the same person across these 10 posts?" But how reliable is that judgment? How sensitive is it to the judge prompt? A more robust design: test whether readers can match posts to personas above chance. That gives you a metric with a clear null hypothesis—random guessing—which is something you can run statistics on.
-
-**Detecting mode collapse.** A common failure mode: all agents converge to the same voice, or all conversations follow the same pattern. How do you detect this? This is a case where a well-designed metric can reveal problems invisible to casual inspection. Think about diversity of expression, opinion distribution, conversational structure. If your 10 agents all sound like "thoughtful, measured, slightly formal AI assistant," that's mode collapse, and it's a problem even if each individual response is well-written.
-
-**The iteration problem.** If you change the persona prompts or the interaction mechanics and the conversations "feel better," is that real improvement or confirmation bias? What would a controlled comparison look like? Remember: with noisy measurement, the variant that *looks* best is expected to be *lucky*, not best. If you run 5 variants and pick the one you like most, you need to account for that selection.
+- **Persona consistency**: can readers match posts to personas above chance? (clear null hypothesis)
+- **Mode collapse detection**: embed agent outputs and measure cluster separation — do all agents sound the same?
+- **Interaction quality**: operationalize "meaningful" — disagreement? persuasion? depth? — then measure it, even roughly
+- **Diversity of expression**: cosine similarity distributions across agents reveal whether diversity is real or surface-level
+- **Vibe eval vs. real eval**: "4 of 6 raters found it substantive" beats "this seems cool" — quantify the noise
 
 ---
 
-## Project 4: Conversational Clustering
+## Project 3: Conversational Clustering
 
 ### Motivation
 
@@ -174,17 +138,15 @@ Some questions to think about:
 
 **Where KDD techniques apply.** This project lives at the intersection of AI agents and core KDD methods. The clustering itself requires choosing and implementing algorithms (K-means, DBSCAN, hierarchical methods), distance metrics (Euclidean, cosine, Jaccard—and the choice matters), and embeddings to represent items in a space where distance is meaningful. Soft clustering maps naturally to probability distributions over assignments. The conversational aspect requires the agent to reason about which points are most uncertain (highest entropy in their cluster assignment) and prioritize those for user feedback—an active learning problem. Graph representations can capture cluster hierarchies and point-cluster relationships. And the entire evaluation challenge is a KDD problem: how do you measure the quality of a clustering when there is no ground truth, only an oracle with evolving preferences?
 
-### Evaluation Challenge
+### Things Worth Measuring
 
-This project has a unique evaluation problem: the ground truth is not just unknown—it's a moving target. The user's preferences evolve during the conversation, and the "right" clustering at turn 10 may be different from the "right" clustering at turn 1. You're not converging to a fixed answer; you're tracking a drifting one.
+Your evaluation should serve the three grading pillars — design alternatives, honest experiments, clear communication. Here are starting points for this project:
 
-**Measuring convergence without a target.** In standard clustering evaluation, you have metrics like silhouette score, adjusted Rand index, or normalized mutual information—but these all assume either an intrinsic quality measure or ground truth labels. Here, the only ground truth is the user's satisfaction, and that changes. How do you measure whether the system is "getting closer" to what the user wants when what the user wants is shifting? One approach: measure the rate at which the user's feedback becomes less corrective over time. If early turns are "no, completely wrong" and later turns are "just move this one point," that's a signal—but is it convergence or fatigue?
-
-**Evaluating the conversation, not just the output.** The final clustering matters, but so does the path. A system that reaches a good clustering in 5 turns is better than one that takes 25. A system that asks useful questions ("should these two groups be separate?") is better than one that asks obvious ones ("do you want clusters?"). How do you measure conversational efficiency? Cognitive load on the user? You could count turns, but not all turns are equal. You could ask users to rate effort, but that's subjective and noisy.
-
-**The contradiction problem.** Users will contradict themselves. Sometimes because they changed their mind, sometimes because the context shifted, sometimes because they were imprecise. Your system needs to handle this gracefully—but how do you evaluate *that*? You could inject synthetic contradictions into a test conversation and measure whether the system detects them, asks for clarification, or silently picks one interpretation. This is one of the rare cases where you can build a controlled test with a known right answer (the system should at least notice the contradiction).
-
-**Bootstrapping user studies.** Ultimately, this system's value is measured by real users doing real tasks. But user studies are expensive and noisy. With 5 users, you can barely distinguish signal from noise. With 10, you have wide confidence intervals. Think about how to design a study that maximizes the information you get per participant: within-subject designs (each user tries two system variants), paired comparisons, and targeted tasks that surface specific capabilities. A well-designed study with 8 participants tells you more than a sloppy study with 30.
+- **Convergence rate**: does feedback become less corrective over turns? (but is that convergence or fatigue?)
+- **Conversational efficiency**: turns to reach a satisfactory clustering — not all turns are equal
+- **Contradiction handling**: inject synthetic contradictions and measure whether the system notices
+- **Clustering quality without ground truth**: silhouette scores, user satisfaction ratings, soft assignment calibration
+- **User study design**: within-subject comparisons maximize signal per participant — plan for wide confidence intervals
 
 ---
 
