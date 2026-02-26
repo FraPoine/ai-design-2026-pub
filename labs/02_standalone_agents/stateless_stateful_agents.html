@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-    <link rel="stylesheet" href="../../lecture-style.css">
+    <link rel="stylesheet" href="../lecture-style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 </head>
 <body>
@@ -78,36 +78,7 @@
 
         <h3>Cost awareness</h3>
 
-        <p>Today's examples are cheap to run individually, but the lesson is about <em>how costs scale</em>:</p>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Example</th>
-                    <th>Model</th>
-                    <th>Cost per turn</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Stateless agent</td>
-                    <td>gpt-4.1-mini</td>
-                    <td>~$0.001</td>
-                </tr>
-                <tr>
-                    <td>Stateful agent (10 turns)</td>
-                    <td>gpt-4.1-mini</td>
-                    <td>~$0.005 (growing)</td>
-                </tr>
-                <tr>
-                    <td>Agent with memory</td>
-                    <td>gpt-4.1-mini × 2</td>
-                    <td>~$0.002 (bounded)</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <p>The key observation: stateful agents with unbounded history have <strong>quadratic cost growth</strong> over a conversation. By turn 100, you're paying for 100× the context of turn 1.</p>
+        <p>A shared API key will be provided during the lab. Today's examples are cheap individually, but the lesson is about <em>how costs scale</em>. The key observation: stateful agents with unbounded history have <strong>quadratic cost growth</strong> over a conversation. By turn 100, you're paying for 100× the context of turn 1. See <a href="https://openai.com/api/pricing/">OpenAI pricing</a> for current rates.</p>
     </section>
 
     <!-- SECTION 1: STATELESS -->
@@ -300,34 +271,39 @@ Total input tokens after N turns:
                 <tr>
                     <th>Turns</th>
                     <th>Approx. input tokens (cumulative)</th>
-                    <th>Cost at $0.15/M input</th>
+                    <th>Cost at gpt-4.1-mini ($0.40/M input)</th>
+                    <th>Cost at gpt-5-nano ($0.05/M input)</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>10</td>
                     <td>15,000</td>
-                    <td>$0.002</td>
+                    <td>$0.006</td>
+                    <td>$0.001</td>
                 </tr>
                 <tr>
                     <td>50</td>
                     <td>375,000</td>
-                    <td>$0.056</td>
+                    <td>$0.15</td>
+                    <td>$0.019</td>
                 </tr>
                 <tr>
                     <td>100</td>
                     <td>1,500,000</td>
-                    <td>$0.225</td>
+                    <td>$0.60</td>
+                    <td>$0.075</td>
                 </tr>
                 <tr>
                     <td>500</td>
                     <td>37,500,000</td>
-                    <td>$5.63</td>
+                    <td>$15.00</td>
+                    <td>$1.88</td>
                 </tr>
             </tbody>
         </table>
 
-        <p>A 500-turn conversation costs 2,500× as much per turn as a 10-turn conversation.</p>
+        <p>A 500-turn conversation costs 2,500× as much per turn as a 10-turn conversation. The model choice matters too — gpt-5-nano is 8× cheaper than gpt-4.1-mini per input token.</p>
 
         <h3>Latency grows too</h3>
 
@@ -356,18 +332,18 @@ Total input tokens after N turns:
             <tbody>
                 <tr>
                     <td>gpt-4.1-mini</td>
-                    <td>128K tokens</td>
-                    <td>~400 turns</td>
+                    <td>1M tokens</td>
+                    <td>~3,300 turns</td>
                 </tr>
                 <tr>
-                    <td>claude-3.5-sonnet</td>
-                    <td>200K tokens</td>
+                    <td>gpt-5-mini</td>
+                    <td>1M tokens</td>
+                    <td>~3,300 turns</td>
+                </tr>
+                <tr>
+                    <td>claude-sonnet-4.6</td>
+                    <td>200K tokens (1M beta)</td>
                     <td>~650 turns</td>
-                </tr>
-                <tr>
-                    <td>gpt-4.1</td>
-                    <td>128K tokens</td>
-                    <td>~400 turns</td>
                 </tr>
             </tbody>
         </table>
@@ -785,7 +761,7 @@ messages = [
 ]
 
 response = client.chat.completions.create(
-    model="gpt-4o",
+    model="gpt-4.1-mini",
     messages=messages  # You manage this list
 )</code></pre>
 
@@ -801,14 +777,14 @@ response = client.chat.completions.create(
 
         <pre><code class="language-python"># Responses API: server can store conversation
 response1 = client.responses.create(
-    model="gpt-4o",
+    model="gpt-4.1-mini",
     input="My name is Alice.",
     store=True  # OpenAI stores this
 )
 
 # Chain without resending history
 response2 = client.responses.create(
-    model="gpt-4o",
+    model="gpt-4.1-mini",
     input="What's my name?",
     previous_response_id=response1.id  # Reference previous
 )</code></pre>

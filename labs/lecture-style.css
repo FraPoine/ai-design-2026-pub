@@ -41,7 +41,7 @@ nav {
     background: rgba(10, 10, 15, 0.85);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
-    padding: 1rem 2rem;
+    padding: 0.25rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -52,24 +52,26 @@ nav .logo {
     font-size: 1.25rem;
     color: var(--accent);
     font-style: italic;
+    white-space: nowrap;
 }
 
 nav ul {
     display: flex;
     list-style: none;
-    gap: 0.25rem;
-    flex-wrap: wrap;
+    gap: 0.1rem;
+    flex-wrap: nowrap;
     justify-content: flex-end;
 }
 
 nav a {
     color: var(--text-secondary);
     text-decoration: none;
-    padding: 0.4rem 0.75rem;
+    padding: 0.2rem 0.5rem;
     border-radius: 6px;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: 500;
     transition: all 0.2s;
+    white-space: nowrap;
 }
 
 nav a:hover {
@@ -86,7 +88,7 @@ nav a.active {
 main {
     max-width: 900px;
     margin: 0 auto;
-    padding: 6rem 2rem 4rem;
+    padding: 5rem 2rem 4rem;
 }
 
 /* Title */

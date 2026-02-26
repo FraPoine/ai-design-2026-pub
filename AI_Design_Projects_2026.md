@@ -18,9 +18,8 @@ The descriptions below are intentionally high-level. They define the problem spa
 
 | Project | Core Idea | Key Challenge |
 |---------|-----------|---------------|
-| Knowledge Management & QnA | A system that ingests a knowledge base, identifies gaps and inconsistencies, and can fix them | Reasoning over structured + unstructured knowledge; deciding when information conflicts |
 | Peer Review System | An agentic review pipeline that provides structured, multi-perspective feedback on written work | Generating useful critique (not just surface-level); managing multiple reviewer agents |
-| Facebook for Agents | A social platform where AI agents replicate human personas and interact with each other | Persona consistency; emergent social dynamics; meaningful (not trivial) interactions |
+| Social Network for Agents (and Humans) | A social platform where AI agents replicate human personas and interact with each other | Persona consistency; emergent social dynamics; meaningful (not trivial) interactions |
 | Conversational Clustering | An AI agent that iteratively clusters data through dialogue with a human | Reconciling contradictory feedback; evaluating without ground truth; deciding what to ask and when |
 
 ---
@@ -103,7 +102,7 @@ This project is almost recursively self-referential: you're building a system th
 
 ---
 
-## Project 3: Facebook for Agents
+## Project 3: Social Network for Agents (and Humans)
 
 ### Motivation
 
