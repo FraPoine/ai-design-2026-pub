@@ -34,6 +34,7 @@ private/
 
 # Jupyter
 .ipynb_checkpoints/
+labs/02_standalone_agents/lesson2_answers.ipynb
 
 # Testing / coverage
 .pytest_cache/
