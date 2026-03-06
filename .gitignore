@@ -48,6 +48,9 @@ htmlcov/
 *.pptx
 *.docx
 
+# Solutions (not distributed)
+**/solutions/
+
 # Generated data
 user_memories.json
 
