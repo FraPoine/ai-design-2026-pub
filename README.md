@@ -21,12 +21,16 @@ The course is organized around five practical learning modules followed by a cul
    - Stateful agents  
    - Short-term memory (session-based)
    - Long-term memory and persistence
+   - Single-call vs. multi-turn agents
+   - Testing and metrics for agent behavior
 
 3. **[Lab 03: AI API & Integration](labs/03_ai-api/)** — System design patterns
    - Agentic loops and autonomy
    - Tool calling and MCP (Model Context Protocol)
    - State and context management
    - Safety guardrails and observability
+   - Architecture of AI systems (AOA framework)
+   - Logging and observability in practice
 
 4. **[Lab 04: Evaluation](labs/04_eval/)** — Measuring system quality
    - Testing strategies
