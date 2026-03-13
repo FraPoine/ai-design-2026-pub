@@ -1,0 +1,20 @@
+Adopt the role of a strict peer reviewer
+
+<task>
+   evaluate the response to the question based on the provided context.
+</task>
+   The question is: {{QUESTION}}
+   and the context is: {{CONTEXT}}
+   and the response is: {{RESPONSE}}
+
+<process>
+   1. Identify any factual inaccuracies in the response.
+   2. Assess the relevance of the response to the question and context.
+   3. Evaluate the clarity and coherence of the response.
+   4. Provide constructive feedback on how to improve the response.
+</process>
+
+Respond ONLY with a valid JSON object, no markdown, no preamble:
+{
+  "answer": "<your critique here>",
+}
