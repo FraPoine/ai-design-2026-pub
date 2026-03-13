@@ -55,7 +55,7 @@ def main():
     
     print(f"\nElapsed: {elapsed:.2f}s")
     
-    # print("\nAnswer:")
+    print("\nAnswer:")
     print(answer)
     
     prompt_judge = render_template(template_name="judge.j2", context=context, question=question, answer=answer, review=None)
@@ -68,14 +68,14 @@ def main():
     
     print(f"\nElapsed for critique: {elapsed:.2f}s")
 
-    # print("\nCritique:")
+    print("\nCritique:")
     print(critique)
     
     prompt_final = render_template(template_name="revisioned_prompt.j2", context=context, question=question, answer=answer, review=critique)
-    print("\nGenerated Prompt for Final Answer:")
-    print("-" * 60)
-    print(prompt_final)
-    print("-" * 60) 
+    # print("\nGenerated Prompt for Final Answer:")
+    # print("-" * 60)
+    # print(prompt_final)
+    # print("-" * 60) 
     
     final_answer = api_call(client, prompt_final)
     print(f"\nElapsed for final answer: {elapsed:.2f}s")
