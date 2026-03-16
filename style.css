@@ -672,6 +672,14 @@ details[open] summary {
   border-bottom: 1px solid var(--color-border);
 }
 
+details .details-content {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  padding: 0.75rem 1.5rem 1rem;
+}
+
 /* Session page styles */
 .session-header {
   margin-bottom: 2rem;

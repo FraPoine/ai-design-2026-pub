@@ -1,6 +1,6 @@
 # Understanding the Sources of Uncertainty - and Why Our Evals are Biased
 
-Part 4 of *Optimizing in the Dark:
+Part 4 of *Iterating in the Dark:
 Organizational Blindness in AI Evaluations*
 
 

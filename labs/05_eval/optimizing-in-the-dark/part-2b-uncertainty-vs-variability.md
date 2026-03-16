@@ -1,6 +1,6 @@
 # Uncertainty vs Variability
 
-Part 2b of *Optimizing in the Dark:
+Part 2b of *Iterating in the Dark:
 Organizational Blindness in AI Evaluations*
 
 *When you see a range, what does it mean?*

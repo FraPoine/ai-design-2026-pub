@@ -1,6 +1,6 @@
 # What To Do, and What Not To Do
 
-Part 5 of *Optimizing in the Dark:
+Part 5 of *Iterating in the Dark:
 Organizational Blindness in AI Evaluations*
 
 

@@ -1,6 +1,6 @@
 # A Structural Flaw in Judgment
 
-Part 1 of *Optimizing in the Dark:
+Part 1 of *Iterating in the Dark:
 Organizational Blindness in AI Evaluations*
 
 *Iterating towards a random target*
