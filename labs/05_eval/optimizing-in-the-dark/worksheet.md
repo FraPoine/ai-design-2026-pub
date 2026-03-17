@@ -121,6 +121,6 @@ It's okay to answer "I don't know" or "best guess" — but at least you'll know 
 
 ---
 
-*This worksheet is part of the [Optimizing in the Dark](./index.md) series on AI evaluation methodology.*
+*This worksheet is part of the [Iterating in the Dark](./index.md) series on AI evaluation methodology.*
 
 **Download:** [worksheet.json](./worksheet.json)

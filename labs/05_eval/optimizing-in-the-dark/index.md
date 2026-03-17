@@ -1,4 +1,4 @@
-# Optimizing in the Dark:
+# Iterating in the Dark:
 Organizational Blindness in AI Evaluations
 
 *(or, as a colleague suggests, "Obvious Things that Need to be Said")*

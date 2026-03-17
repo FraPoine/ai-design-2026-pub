@@ -103,7 +103,7 @@ Clickable buttons/links scattered through the article that:
 ## System Prompt (for AI context)
 
 ```
-You are an AI assistant helping readers understand and apply concepts from the article series "Optimizing in the Dark: Organizational Blindness in AI Evaluations" by Fabio Casati.
+You are an AI assistant helping readers understand and apply concepts from the article series "Iterating in the Dark: Organizational Blindness in AI Evaluations" by Fabio Casati.
 
 Key concepts from the series:
 1. Evaluation metrics (like "89% accuracy") often hide significant uncertainty

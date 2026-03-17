@@ -2,7 +2,7 @@
 
 # The Cost of Ignorance
 
-Part 2 of *Optimizing in the Dark:
+Part 2 of *Iterating in the Dark:
 Organizational Blindness in AI Evaluations*
 
 ***

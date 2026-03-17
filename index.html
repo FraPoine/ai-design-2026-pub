@@ -15,336 +15,226 @@
   <!-- Header loaded dynamically -->
 
   <main>
-    <h1>Designing Large Scale AI Systems — CS Master Course</h1>
-    <p class="text-muted">Spring 2026 · <a href="https://reliableai.github.io">reliableai.github.io</a> · <a href="https://github.com/reliableai/ai-design-2026-pub">GitHub repo</a></p>
-
-    <h2>Course Description</h2>
-    <p>
-      This course provides a comprehensive introduction to designing, building, and evaluating
-      large-scale AI systems. Students will gain hands-on experience building AI-powered applications
-      and learn rigorous evaluation methodologies essential for deploying AI systems in production.
-    </p>
-
-    <details class="objectives-box">
-      <summary><h2 style="display: inline; cursor: pointer;">Learning Objectives</h2></summary>
-      <p>By the end of this course, you will:</p>
-      <ol>
-        <li><strong>Build effective, reliable, maintainable AI systems at scale.</strong> Solve complex problems by decomposing them in a principled way. Ship a reliable AI feature into an existing product.</li>
-        <li><strong>Use AI to build AI.</strong> Leverage AI for development, evaluation, and system management. Understand what this unlocks and where the limits are.</li>
-        <li><strong>Iterate towards success — rather than optimizing in the dark.</strong> Master the science of monitoring, analysis, and estimation. Stand up an evaluation harness you can run in CI.</li>
-        <li><strong>Master the key conceptual abstractions.</strong> Build observability, cost controls, and incident-ready guardrails. Take lessons from software engineering past, but do so critically.</li>
-        <li><strong>Separate signal from hype.</strong> Critically review emerging practices and proposed standards, learning what to use and where.</li>
-        <li><strong>Think in systems.</strong> Understand which engineering principles carry forward and which new abstractions are essential. Know when not to use agents (and what to do instead).</li>
-      </ol>
-    </details>
-
-    <div class="phases-box">
-      <h2>Course Structure</h2>
-      <p>The course spans 12 weeks with two 90-minute lessons per week (24 lessons total), organized into four phases:</p>
-      <div class="phases-grid">
-        <div class="phase-card phase-1">
-          <div class="phase-number">Phase 1</div>
-          <h3>Building AI Agents</h3>
-          <div class="phase-lessons">Lessons 1–3</div>
-          <p>LLM API calls, mastering individual calls, review cycles, state, and judges.</p>
-        </div>
-        <div class="phase-card phase-2">
-          <div class="phase-number">Phase 2</div>
-          <h3>Iterating Towards Success</h3>
-          <div class="phase-lessons">Lessons 4–6</div>
-          <p>Monitoring, quality estimation, uncertainty quantification, systematic iteration.</p>
-        </div>
-        <div class="phase-card phase-3">
-          <div class="phase-number">Phase 3</div>
-          <h3>Building Effective, Manageable Complex Systems. At Scale.</h3>
-          <div class="phase-lessons">Lessons 7–11</div>
-          <p>Councils of agents, system design, key abstractions, cost controls, guardrails, frameworks.</p>
-        </div>
-        <div class="phase-card phase-4">
-          <div class="phase-number">Phase 4</div>
-          <h3>Capstone Project</h3>
-          <div class="phase-lessons">Lessons 12–24</div>
-          <p>Apply everything: specification, midterm, reviews, working sessions, presentations.</p>
-        </div>
-      </div>
+    <div class="hero">
+      <h1>Designing Large Scale AI Systems</h1>
+      <p class="subtitle">CS Master Course | Spring 2026 | 12 weeks</p>
     </div>
 
-    <h2>Weekly Schedule</h2>
+    <section>
+      <h2>About This Course</h2>
+      <p>
+        This course provides a comprehensive introduction to designing, building, and evaluating
+        large-scale AI systems. Students will gain hands-on experience building AI-powered applications
+        and learn rigorous evaluation methodologies essential for deploying AI systems in production.
+      </p>
+      <p>
+        Basic software engineering experience is preferred — but not a must.
+        The main prerequisite is the passion to build great systems.
+      </p>
+    </section>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Week</th>
-          <th>Lesson</th>
-          <th>Topic</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Phase 1 -->
-        <tr class="week-header">
-          <td colspan="3"><span class="phase phase-1">Phase 1</span> Building AI Agents</td>
-        </tr>
-        <tr>
-          <td rowspan="2"><strong>1</strong></td>
-          <td>L1</td>
-          <td>
-            <div class="lesson-title"><a href="labs/01_hello_world/hello_world_3.0.html">Hello World</a></div>
-            <div class="lesson-desc">Connecting to AI via API: chat, streaming, voice, and image</div>
-          </td>
-        </tr>
-        <tr>
-          <td>L2</td>
-          <td>
-            <div class="lesson-title"><a href="labs/02_standalone_agents/mastering_individual_calls.html">Mastering Individual AI Calls</a></div>
-            <div class="lesson-desc">Prompt engineering, structured outputs, best practices for reliable single calls</div>
-          </td>
-        </tr>
-        <tr>
-          <td><strong>2</strong></td>
-          <td>L3</td>
-          <td>
-            <div class="lesson-title"><a href="labs/03_review_and_judge/datasets.html">Review Cycles, State & Judges</a></div>
-            <div class="lesson-desc">Review loops, managing context and session memory, LLM-as-judge patterns</div>
-          </td>
-        </tr>
+    <section>
+      <details open>
+        <summary><h2 style="display:inline; margin:0; padding-bottom:0; margin-left:0.5rem;">Learning Objectives</h2></summary>
+        <div class="details-content">
+          <p>By the end of this course, you will:</p>
 
-        <!-- Phase 2 -->
-        <tr class="week-header">
-          <td colspan="3"><span class="phase phase-2">Phase 2</span> Iterating Towards Success</td>
-        </tr>
-        <tr>
-          <td><strong>2</strong></td>
-          <td>L4</td>
-          <td>
-            <div class="lesson-title">Tools, Agentic Loops & Monitoring</div>
-            <div class="lesson-desc">Tool calling, orchestration, observability, runtime checks, CI-integrated evaluation harnesses</div>
-          </td>
-        </tr>
-        <tr>
-          <td rowspan="2"><strong>3</strong></td>
-          <td>L5</td>
-          <td>
-            <div class="lesson-title"><a href="labs/05_eval/optimizing-in-the-dark/index.html">Quality & Performance Estimation</a></div>
-            <div class="lesson-desc">Metrics, golden datasets, LLM-as-judge, "Optimizing in the Dark"</div>
-          </td>
-        </tr>
-        <tr>
-          <td>L6</td>
-          <td>
-            <div class="lesson-title">Iterating on Clients, Agents & Prompts</div>
-            <div class="lesson-desc">Systematic improvement cycles, experiment design, error analysis</div>
-          </td>
-        </tr>
+          <h3>1. Build Effective, Reliable AI Systems at Scale</h3>
+          <p>Solve complex problems by decomposing them in a principled way. Ship a reliable AI feature into an existing product.</p>
 
-        <!-- Phase 3 -->
-        <tr class="week-header">
-          <td colspan="3"><span class="phase phase-3">Phase 3</span> Building Effective, Manageable Complex Systems. At Scale.</td>
-        </tr>
-        <tr>
-          <td rowspan="2"><strong>4</strong></td>
-          <td>L7</td>
-          <td>
-            <div class="lesson-title">Councils of Agents</div>
-            <div class="lesson-desc">Eliciting diversity of opinions, ensemble approaches, consensus mechanisms</div>
-          </td>
-        </tr>
-        <tr>
-          <td>L8</td>
-          <td>
-            <div class="lesson-title">Building Complex Systems</div>
-            <div class="lesson-desc">Divide et impera, testability, separation of concerns; when NOT to use agents</div>
-          </td>
-        </tr>
-        <tr>
-          <td rowspan="2"><strong>5</strong></td>
-          <td>L9</td>
-          <td>
-            <div class="lesson-title">Key Abstractions & Interfaces</div>
-            <div class="lesson-desc">Cost controls, incident-ready guardrails, <a href="labs/04_ai-api/mcp_tutorial.html">MCP protocol</a>, observability patterns</div>
-          </td>
-        </tr>
-        <tr>
-          <td>L10</td>
-          <td>
-            <div class="lesson-title">Structuring Complex Projects</div>
-            <div class="lesson-desc">Shipping into existing products, maintaining large AI systems, multi-version considerations</div>
-          </td>
-        </tr>
-        <tr>
-          <td><strong>6</strong></td>
-          <td>L11</td>
-          <td>
-            <div class="lesson-title">AI Frameworks</div>
-            <div class="lesson-desc">When and why to use frameworks; LangChain as a case study</div>
-          </td>
-        </tr>
+          <h3>2. Use AI to Build AI</h3>
+          <p>Leverage AI for development, evaluation, and system management. Understand what this unlocks and where the limits are.</p>
 
-        <!-- Phase 4 -->
-        <tr class="week-header">
-          <td colspan="3"><span class="phase phase-4">Phase 4</span> Putting Ideas at Work in a Capstone Project</td>
-        </tr>
-        <tr>
-          <td><strong>6</strong></td>
-          <td>L12</td>
-          <td>
-            <div class="lesson-title">Project Specification</div>
-            <div class="lesson-desc">Track selection, requirements, project kick-off</div>
-          </td>
-        </tr>
-        <tr>
-          <td rowspan="2"><strong>7</strong></td>
-          <td>L13</td>
-          <td>
-            <div class="lesson-title">Midterm Exam</div>
-            <div class="lesson-desc">Individual written exam (Lessons 1-11)</div>
-          </td>
-        </tr>
-        <tr>
-          <td>L14</td>
-          <td>
-            <div class="lesson-title">Project Review #1</div>
-            <div class="lesson-desc">Problem statement, architecture diagram, evaluation plan</div>
-          </td>
-        </tr>
-        <tr>
-          <td rowspan="2"><strong>8</strong></td>
-          <td>L15</td>
-          <td>
-            <div class="lesson-title">Working Session: Implementation</div>
-            <div class="lesson-desc">Hands-on coding, 5-min stand-ups</div>
-          </td>
-        </tr>
-        <tr>
-          <td>L16</td>
-          <td>
-            <div class="lesson-title">Working Session: Evaluation</div>
-            <div class="lesson-desc">First evaluation run, peer reviews</div>
-          </td>
-        </tr>
-        <tr>
-          <td rowspan="2"><strong>9</strong></td>
-          <td>L17</td>
-          <td>
-            <div class="lesson-title">Mid-Project Presentations</div>
-            <div class="lesson-desc">10-12 min internal demo per student</div>
-          </td>
-        </tr>
-        <tr>
-          <td>L18</td>
-          <td>
-            <div class="lesson-title">Design Clinic</div>
-            <div class="lesson-desc">Breakout tables: architecture, evaluation, safety</div>
-          </td>
-        </tr>
-        <tr>
-          <td rowspan="2"><strong>10</strong></td>
-          <td>L19</td>
-          <td>
-            <div class="lesson-title">Integration & Hardening</div>
-            <div class="lesson-desc">Error handling, observability, edge cases</div>
-          </td>
-        </tr>
-        <tr>
-          <td>L20</td>
-          <td>
-            <div class="lesson-title">Final Evaluation Runs</div>
-            <div class="lesson-desc">Run evaluation suites, draft results</div>
-          </td>
-        </tr>
-        <tr>
-          <td rowspan="2"><strong>11</strong></td>
-          <td>L21</td>
-          <td>
-            <div class="lesson-title">Project Review #2</div>
-            <div class="lesson-desc">Results, error taxonomy, storytelling</div>
-          </td>
-        </tr>
-        <tr>
-          <td>L22</td>
-          <td>
-            <div class="lesson-title">Presentation Rehearsals</div>
-            <div class="lesson-desc">Dry runs, peer feedback</div>
-          </td>
-        </tr>
-        <tr>
-          <td rowspan="2"><strong>12</strong></td>
-          <td>L23</td>
-          <td>
-            <div class="lesson-title">Final Presentations</div>
-            <div class="lesson-desc">Graded presentations with Q&A</div>
-          </td>
-        </tr>
-        <tr>
-          <td>L24</td>
-          <td>
-            <div class="lesson-title">Course Retrospective</div>
-            <div class="lesson-desc">Final clarifications, retrospective discussion</div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+          <h3>3. Iterate Towards Success</h3>
+          <p>Master the science of monitoring, analysis, and estimation. Stand up an evaluation harness you can run in CI.</p>
 
-    <h2>Prerequisites</h2>
-    <p>
-      Basic software engineering experience is preferred — but not a must.
-      The main prerequisite is the passion to build great systems.
-    </p>
+          <h3>4. Identify and Master the Key Abstractions</h3>
+          <p>Build observability, cost controls, and incident-ready guardrails. Take lessons from software engineering past, but do so critically.</p>
 
-    <h2>Grading</h2>
-    <table class="grading-table">
-      <thead>
-        <tr>
-          <th>Component</th>
-          <th>Weight</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            <strong>Midterm Exam</strong>
-            <div class="text-muted text-small">Individual, Week 7</div>
-          </td>
-          <td>30%</td>
-        </tr>
-        <tr>
-          <td>
-            <strong>Course Project</strong>
-            <div class="text-muted text-small">Individual responsibility, Weeks 6–12</div>
-          </td>
-          <td>70%</td>
-        </tr>
-      </tbody>
-    </table>
+          <h3>5. Think in Systems</h3>
+          <p>Understand which engineering principles carry forward and which new abstractions are essential.</p>
+        </div>
+      </details>
+    </section>
 
-    <p><a href="assessments.html" class="btn">View Assessment Details</a></p>
+    <section>
+      <h2>Sessions</h2>
 
-    <h2>Course Policies</h2>
+      <h3><span class="phase phase-1">Phase 1</span> Building AI Agents</h3>
+      <div class="modules-grid">
+        <a href="labs/01_hello_world/hello_world_3.0.html" class="module-card">
+          <div class="number">L1 · Week 1</div>
+          <div class="title">Hello World</div>
+          <p class="description">Connecting to AI via API: chat, streaming, voice, and image</p>
+        </a>
+        <a href="labs/02_standalone_agents/mastering_individual_calls.html" class="module-card">
+          <div class="number">L2 · Week 1</div>
+          <div class="title">Mastering Individual AI Calls</div>
+          <p class="description">Prompt engineering, structured outputs, best practices for reliable single calls</p>
+        </a>
+        <a href="labs/04_managing_context/stateless_stateful_agents.html" class="module-card">
+          <div class="number">L3 · Week 2</div>
+          <div class="title">Managing Context</div>
+          <p class="description">Stateless &amp; stateful agents, conversation history, cost &amp; latency tradeoffs, memory strategies</p>
+        </a>
+        <a href="labs/04b_tool_calling/tool_calling.html" class="module-card">
+          <div class="number">L4 · Week 2</div>
+          <div class="title">Tools & Agentic Loops</div>
+          <p class="description">Tool calling, function schemas, orchestration loops, when to call another tool vs. stop</p>
+        </a>
+      </div>
 
-    <h3>Attendance</h3>
-    <p>
-      Attendance is expected for all lessons. Phase 3 sessions are particularly important
-      as they include project reviews, working sessions, and presentations.
-    </p>
+      <h3><span class="phase phase-2">Phase 2</span> Iterating Towards Success</h3>
+      <div class="modules-grid">
+        <a href="labs/03_review_and_judge/datasets.html" class="module-card">
+          <div class="number">L5 · Week 3</div>
+          <div class="title">Assessing Outputs & LLM as a Judge</div>
+          <p class="description">Review loops, managing context and session memory, LLM-as-judge patterns</p>
+        </a>
+        <a href="labs/05_eval/optimizing-in-the-dark/index.html" class="module-card">
+          <div class="number">L6 · Week 3</div>
+          <div class="title">Iterating Towards Customer Success</div>
+          <p class="description">Metrics, golden datasets, LLM-as-judge, "Iterating in the Dark"</p>
+        </a>
+        <a href="labs/07_monitoring/monitoring.html" class="module-card">
+          <div class="number">L7 · Week 4</div>
+          <div class="title">Monitoring & Observability</div>
+          <p class="description">Runtime checks, logging, tracing, CI-integrated evaluation harnesses</p>
+        </a>
+        <a href="labs/08_automating_improvement/automating_improvement.html" class="module-card">
+          <div class="number">L8 · Week 4</div>
+          <div class="title">Automating the Improvement Cycle Without Overfitting</div>
+          <p class="description">Systematic improvement cycles, experiment design, error analysis</p>
+        </a>
+      </div>
 
-    <h3>Academic Integrity</h3>
-    <p>
-      All work submitted must be your own (or your team's for the project). <strong>You must use AI tools to assist with coding and learning</strong>, but you must understand and be able to explain all concepts in your submissions and demonstrate ability to manage your codebase, with AI (or without, if you prefer, but that's going to be hard).
-    </p>
+      <h3><span class="phase phase-3">Phase 3</span> Building and Managing Complex Systems</h3>
+      <div class="modules-grid">
+        <a href="labs/09_councils/councils.html" class="module-card">
+          <div class="number">L9 · Week 5</div>
+          <div class="title">Councils of Agents</div>
+          <p class="description">Eliciting diversity of opinions, ensemble approaches, consensus mechanisms</p>
+        </a>
+        <a href="labs/10_complex_systems/complex_systems.html" class="module-card">
+          <div class="number">L10 · Week 5</div>
+          <div class="title">Building Complex Systems</div>
+          <p class="description">Divide et impera, testability, separation of concerns; when NOT to use agents</p>
+        </a>
+        <a href="labs/11_key_abstractions/key_abstractions.html" class="module-card">
+          <div class="number">L11 · Week 5</div>
+          <div class="title">Key Abstractions for Mastering Complex Agentic Systems</div>
+        </a>
+        <a href="labs/12_structuring_projects/structuring_projects.html" class="module-card">
+          <div class="number">L12 · Week 6</div>
+          <div class="title">Structuring Complex Projects</div>
+          <p class="description">Shipping into existing products, maintaining large AI systems, multi-version considerations</p>
+        </a>
+        <a href="labs/13_frameworks/frameworks.html" class="module-card">
+          <div class="number">L13 · Week 6</div>
+          <div class="title">Using AI Frameworks</div>
+          <p class="description">When and why to use frameworks; LangChain as a case study</p>
+        </a>
+      </div>
 
-    <h3>Collaboration</h3>
-    <p>
-      The midterm exam is strictly individual. The course project may be part of a larger group effort — different people can build different pieces of the same system — but each student has specific individual responsibilities and scope, and is graded individually on their own contribution.
-    </p>
+      <h3><span class="phase phase-4">Phase 4</span> Capstone Project</h3>
+      <div class="modules-grid">
+        <div class="module-card">
+          <div class="number">L14 · Week 6</div>
+          <div class="title">Project Specification</div>
+          <p class="description">Track selection, requirements, project kick-off</p>
+        </div>
+        <div class="module-card">
+          <div class="number">L15 · Week 7</div>
+          <div class="title">Midterm Exam</div>
+          <p class="description">Individual written exam (Lessons 1–13)</p>
+        </div>
+        <div class="module-card">
+          <div class="number">L16 · Week 7</div>
+          <div class="title">Project Review #1</div>
+          <p class="description">Problem statement, architecture diagram, evaluation plan</p>
+        </div>
+        <div class="module-card">
+          <div class="number">L17–18 · Week 8</div>
+          <div class="title">Working Sessions</div>
+          <p class="description">Implementation, first evaluation run, peer reviews</p>
+        </div>
+        <div class="module-card">
+          <div class="number">L19–20 · Week 9</div>
+          <div class="title">Mid-Project Presentations & Design Clinic</div>
+          <p class="description">10–12 min demos, breakout tables: architecture, evaluation, safety</p>
+        </div>
+        <div class="module-card">
+          <div class="number">L21–22 · Week 10</div>
+          <div class="title">Integration, Hardening & Final Eval</div>
+          <p class="description">Error handling, observability, edge cases, run evaluation suites</p>
+        </div>
+        <div class="module-card">
+          <div class="number">L23–24 · Week 11</div>
+          <div class="title">Project Review #2 & Rehearsals</div>
+          <p class="description">Results, error taxonomy, storytelling, dry runs, peer feedback</p>
+        </div>
+        <div class="module-card">
+          <div class="number">L25–26 · Week 12</div>
+          <div class="title">Final Presentations & Retrospective</div>
+          <p class="description">Graded presentations with Q&A, course wrap-up</p>
+        </div>
+      </div>
+    </section>
 
-    <h2>Office Hours</h2>
-    <p>
-      Office hours are held right after each class. Additional appointments can be
-      scheduled via email.
-    </p>
+    <section>
+      <h2>Assessment</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Component</th>
+            <th>Weight</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Midterm Exam</strong></td>
+            <td>30%</td>
+            <td>Individual, Week 7</td>
+          </tr>
+          <tr>
+            <td><strong>Course Project</strong></td>
+            <td>70%</td>
+            <td>Individual responsibility, Weeks 6–12</td>
+          </tr>
+        </tbody>
+      </table>
+      <p><a href="assessments.html">See full assessment details, rubrics, and policies &rarr;</a></p>
+    </section>
 
-    <p class="mt-3">
-      <a href="about.html" class="btn-secondary btn">Contact Information</a>
-    </p>
+    <section>
+      <h2>Policies</h2>
+
+      <h3>Attendance</h3>
+      <p>
+        Attendance is expected for all lessons. Phase 4 sessions are particularly important
+        as they include project reviews, working sessions, and presentations.
+      </p>
+
+      <h3>Academic Integrity</h3>
+      <p>
+        All work submitted must be your own (or your team's for the project). <strong>You must use AI tools to assist with coding and learning</strong>, but you must understand and be able to explain all concepts in your submissions and demonstrate ability to manage your codebase, with AI (or without, if you prefer, but that's going to be hard).
+      </p>
+
+      <h3>Collaboration</h3>
+      <p>
+        The midterm exam is strictly individual. The course project may be part of a larger group effort — different people can build different pieces of the same system — but each student has specific individual responsibilities and scope, and is graded individually on their own contribution.
+      </p>
+    </section>
+
+    <section>
+      <h2>Office Hours</h2>
+      <p>
+        Office hours are held right after each class. Additional appointments can be
+        scheduled via email.
+      </p>
+      <p><a href="about.html" class="btn-secondary btn">Contact Information</a></p>
+    </section>
 
     <section id="feedback" class="quick-feedback">
       <h3>Have 20 seconds?</h3>

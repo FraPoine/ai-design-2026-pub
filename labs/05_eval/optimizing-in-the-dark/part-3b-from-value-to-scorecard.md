@@ -1,6 +1,6 @@
 # From Value to Scorecards: Enabling Effective Dev Iterations
 
-Part 3b of *Optimizing in the Dark:
+Part 3b of *Iterating in the Dark:
 Organizational Blindness in AI Evaluations*
 
 *Knowing where to improve*

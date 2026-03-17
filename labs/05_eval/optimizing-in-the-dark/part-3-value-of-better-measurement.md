@@ -1,6 +1,6 @@
 # Better "Evals" Beats Better Dev
 
-Part 3 of *Optimizing in the Dark:
+Part 3 of *Iterating in the Dark:
 Organizational Blindness in AI Evaluations*
 
 *The value of knowing what you're measuring*

@@ -1,4 +1,4 @@
-# Optimizing in the Dark:
+# Iterating in the Dark:
 Organizational Blindness in AI Evaluations
 
 ## Part 2: The Cost of Inaction
